@@ -28,3 +28,43 @@ const harcamaAlaniInput = document.getElementById("harcama-alani");
 //* harcama tablosu
 const harcamaBody = document.getElementById("harcama-body");
 const temizleBtn = document.getElementById("temizle-btn");
+
+//!ilk formu doldurma
+
+harcamaFormu.addEventListener("submit",(e)=>{
+e.preventDefault() //reload u engellemek için
+
+const yeniHarcama = {
+    tarih: tarihInput.value,
+    miktar: miktarInput.value,
+    aciklama: harcamaAlaniInput.value,
+    id: new Date().getTime()
+};
+
+harcamaListesi.push(yeniHarcama);
+
+
+//ekranan bastır
+
+
+harcamayiShowScreen(yeniHarcama)
+
+
+
+})
+
+//!harcamaları domdaki table a bastır
+
+const harcamayiShowScreen=({id,miktar,tarih,aciklama})=>{
+
+    // const{id,miktar,tarih,aciklama}=harcamaListesi
+
+    harcamaBody.innerHTML+=`
+    <tr>
+    <td>${tarih}</td>  
+    <td></td>  
+    <td></td>  
+    <td></td>  
+    </tr>`
+
+}
