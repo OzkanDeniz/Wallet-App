@@ -41,7 +41,7 @@ const yeniHarcama = {
     id: new Date().getTime()
 };
 
-// harcamaListesi.push(yeniHarcama);
+harcamaListesi.push(yeniHarcama);
 
 
 //ekranan bastır
@@ -49,7 +49,7 @@ const yeniHarcama = {
 
 harcamayiShowScreen(yeniHarcama)
 
-
+hesaplaGuncelle()
 
 })
 
@@ -90,8 +90,27 @@ e.preventDefault()
 
 gelirler=gelirler + Number(gelirInput.value)
 
-gelirinizTAble.textContent = gelirler
+// gelirinizTAble.textContent = gelirler
 
-
+hesaplaGuncelle()
 
 })
+
+//! hesaplar ve güncelle
+
+const hesaplaGuncelle=()=>{
+    
+    gelirinizTAble.textContent = gelirler
+
+    const giderler =harcamaListesi.reduce((toplam,harcama)=>toplam+Number(harcama.miktar),0)
+
+    giderinizTable.textContent = giderler
+
+    kalanTable.textContent=gelirler -giderler
+
+
+
+
+
+
+}
