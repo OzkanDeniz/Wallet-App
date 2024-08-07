@@ -41,7 +41,7 @@ const yeniHarcama = {
     id: new Date().getTime()
 };
 
-harcamaListesi.push(yeniHarcama);
+// harcamaListesi.push(yeniHarcama);
 
 
 //ekranan bastır
@@ -61,10 +61,37 @@ const harcamayiShowScreen=({id,miktar,tarih,aciklama})=>{
 
     harcamaBody.innerHTML+=`
     <tr>
-    <td>${tarih}</td>  
-    <td></td>  
-    <td></td>  
-    <td></td>  
-    </tr>`
+    <td class ="bg-warning">${tarih}</td>  
+    <td class ="bg-warning">${aciklama}</td>  
+    <td class ="bg-warning">${miktar}</td>  
+    <td class ="bg-warning"><i  class="fa-solid fa-trash-can text-danger"  type="button"></i></td>  
+    </tr>`;
 
-}
+    //*silme
+
+
+document.querySelectorAll(".fa-trash-can").forEach((sil)=>{
+    sil.onclick=()=>{
+
+        sil.parentElement.parentElement.remove()
+    }
+})
+
+
+
+};
+
+
+//!ekle formu
+
+ekleFormu.addEventListener("submit",(e)=>{
+e.preventDefault()
+
+
+gelirler=gelirler + Number(gelirInput.value)
+
+gelirinizTAble.textContent = gelirler
+
+
+
+})
