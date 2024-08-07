@@ -13,8 +13,11 @@ const giderinizTable = document.getElementById("gideriniz")
 const kalanTable = document.getElementById("kalan")
 
 //?variables
-let gelirler = 0
-let harcamaListesi = []
+let gelirler = Number(localStorage.getItem("gelirler")) || 0;
+let harcamaListesi = JSON.parse(localStorage.getItem("harcamalar")) || []
+
+
+
 
 //*harcama formu
 
@@ -44,10 +47,18 @@ const yeniHarcama = {
 harcamaListesi.push(yeniHarcama);
 
 
+//?localStorage e diziyi yollayalım
+localStorage.setItem("harcamalar",JSON.stringify(harcamaListesi))
+
 //ekranan bastır
 
 
 harcamayiShowScreen(yeniHarcama)
+
+
+harcamaFormu.reset()
+// tarihInput=""
+
 
 hesaplaGuncelle()
 
@@ -88,9 +99,13 @@ ekleFormu.addEventListener("submit",(e)=>{
 e.preventDefault()
 
 
-gelirler=gelirler + Number(gelirInput.value)
+gelirler = gelirler + Number(gelirInput.value)
+
+gelirInput.value =""
 
 // gelirinizTAble.textContent = gelirler
+
+localStorage.setItem("gelirler", gelirler)
 
 hesaplaGuncelle()
 
@@ -109,8 +124,32 @@ const hesaplaGuncelle=()=>{
     kalanTable.textContent=gelirler -giderler
 
 
-
-
-
-
 }
+
+//!bilgileri temizle
+
+temizleBtn.onclick=()=>{
+
+    if(confirm("tüm verileri silmek istediğine eminmisin?")){
+        harcamaListesi=[]
+
+        gelirler=0
+       
+
+   hesaplaGuncelle()
+
+   harcamaBody.innerHTML=""
+
+
+    }
+}
+
+//!refresh durumunda localStorage den veriler ekranan basılsın
+harcamaListesi.forEach((a)=>
+harcamayiShowScreen(a)
+
+
+)
+// harcamayiShowScreen();
+hesaplaGuncelle();
+
